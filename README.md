@@ -6,6 +6,10 @@ ScreenOps watches live work context in the browser, extracts one structured work
 
 Repository: https://github.com/Ajey95/screenops-mvp
 
+## Privacy-First Architecture
+
+![ScreenOps privacy-first architecture](docs/screenops-privacy-first-architecture.png)
+
 ## Demo
 
 Recommended recording flow:
