@@ -8,28 +8,16 @@ Repository: https://github.com/Ajey95/screenops-mvp
 
 ## Demo Link
 
-Demo video: `Add your recorded demo link here`
+Demo video: [Link](https://youtu.be/2djY_VtzFu8)
 
 ## Privacy-First Architecture
 
 ![ScreenOps privacy-first architecture](docs/screenops-privacy-first-architecture.png)
 
 ## Demo
+In the demo, I share a real Discord screen with a message asking me to send the finalized Q3 performance report to Priya Nair by Thursday, including her email address. ScreenOps reads the screen locally, transcribes the related audio locally, and extracts one primary commitment. The Network tab is the privacy proof: no screen frame uploads, no audio file uploads, only the final structured intent JSON crosses the boundary. The backend receives that JSON, plans actions, classifies risk, waits for approval where needed, executes tools, verifies results, and records an audit trail.
 
-Recommended recording flow:
 
-1. Open the app at `http://127.0.0.1:5173`.
-2. Share a real Discord window or browser tab containing the prepared message in [docs/demo_discord_message.md](docs/demo_discord_message.md).
-3. Start live capture with microphone or tab/system audio enabled.
-4. Show that SmolVLM/OCR, Whisper tiny, and the browser intent model run locally.
-5. Open the browser Network tab and point out that raw screenshots, audio chunks, and transcript blobs are not uploaded.
-6. Show the final intent JSON sent to the backend.
-7. Show LangGraph planning, risk classification, and the approval queue.
-8. Let low-risk Calendar and Sheets actions execute.
-9. Approve the medium-risk Gmail draft.
-10. Show verified Google Workspace results.
-
-The demo script is in [DEMO_SCRIPT.md](DEMO_SCRIPT.md).
 
 ## Problem Statement
 
@@ -221,7 +209,6 @@ Full AI usage documentation is in [AI_USAGE.md](AI_USAGE.md).
 ## Submission Materials
 
 - Source code: this repository
-- Demo script: [DEMO_SCRIPT.md](DEMO_SCRIPT.md)
 - Submission summary: [SUBMISSION.md](SUBMISSION.md)
 - AI usage: [AI_USAGE.md](AI_USAGE.md)
 - Architecture notes: [ARCHITECTURE.md](ARCHITECTURE.md)
