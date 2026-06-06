@@ -115,53 +115,31 @@ Narration goal:
 
 ScreenOps is a privacy-first agentic workspace assistant.
 
-The core problem is simple: my screen has the richest context about my work, but it is also the one thing I cannot safely send to a cloud AI model.
+The problem is that the screen has the richest work context, but it is also the most sensitive. In enterprise, finance, healthcare, legal, or HR workflows, raw screen pixels and raw meeting audio cannot safely be sent to a cloud AI model.
 
-That matters for enterprise teams, legal work, healthcare, HR, finance, and any environment where private screen content cannot leave the device.
+ScreenOps solves this with a strict privacy boundary.
 
-ScreenOps is not a chatbot. I am not typing a prompt and asking a model what to do.
+Everything private runs inside the browser tab. Screen capture is processed by SmolVLM and local OCR. Audio is transcribed by Whisper tiny. A browser-side Transformer.js pipeline on WebGPU fuses screen and audio into one structured intent.
 
-Instead, ScreenOps watches live work context in the browser, extracts one primary structured intent signal locally, and then lets a backend agent safely act on that signal.
+The key point is this: raw screenshots, raw audio chunks, and transcript blobs never leave the browser. The backend receives only compact intent JSON.
 
-The architecture is split into two parts.
+In this demo, I am sharing a real Discord screen. The message asks me to send the finalized Q3 performance report to Priya Nair by Thursday, and includes her email address. ScreenOps reads the screen locally, transcribes the related audio locally, waits for both outputs, and extracts one primary commitment.
 
-First, the browser does the sensing and reasoning locally. Screen capture goes into SmolVLM for screen understanding. Microphone audio goes into Whisper tiny for transcription. ScreenOps waits for both local outputs, then fuses the screen and audio context into one structured intent using a local Transformer.js model pipeline running with WebGPU.
+The Network tab is the privacy proof. There are no screen frame uploads and no audio file uploads. Only the final structured intent JSON crosses the boundary.
 
-This is the key privacy boundary. Raw screen pixels never leave the browser tab. Raw audio never leaves the browser tab. The backend receives only a small JSON signal with fields like entity, action required, deadline, and confidence.
+Once that JSON reaches the backend, a FastAPI and LangGraph agent routes the signal, enriches context, plans actions, classifies risk, waits for approval where needed, executes tools, verifies results, and records an audit trail.
 
-Here I am loading the local model stack. These models run inside a browser worker using Transformers.js and WebGPU, so the private context is processed on-device instead of being uploaded to a cloud model.
+Here, the agent proposes three real actions: create a Gmail draft, create a Google Calendar reminder for Thursday, and append the commitment to a Google Sheet.
 
-Now I start the live ScreenOps flow.
+The approval layer is important. Low-risk actions, like Calendar and Sheets, can execute automatically. The Gmail draft is medium risk, so it waits for human approval. I can approve, modify, or reject before anything is sent.
 
-I am sharing a real Discord screen, and if the browser offers it, I enable shared tab or system audio. If the vision model's OCR output is low confidence, ScreenOps runs a local OCR fallback on the captured frame inside the browser worker. The backend still never receives the raw Discord message, screenshots, audio chunks, or transcript blobs.
+The backend executes actions through a local ScreenOps Google MCP server over stdio. It exposes Gmail draft creation, Calendar event creation, Sheets append, and verification tools. ScreenOps then verifies that the draft exists, the event exists, and the sheet row was appended.
 
-For the MVP, ScreenOps intentionally extracts one primary actionable commitment per run. A long Discord message may contain several possible follow-ups, but the demo focuses on the strongest one: sending the finalized Q3 performance report to Priya by Thursday.
+So this is not just a chatbot or workflow builder. ScreenOps combines local browser inference, a privacy-preserving JSON boundary, LangGraph orchestration, human approval, MCP tool execution, and verified outcomes.
 
-In the Network tab, the important proof is what is missing. There are no screen frame uploads, no audio file uploads, and no transcript blob being sent to the backend. The application sends only the final structured intent JSON.
+The project also includes evals: sixteen extraction scenarios and fifteen planning scenarios covering parsing, deadlines, false positives, action plans, and risk classification.
 
-That JSON is the only boundary-crossing payload.
-
-Once the backend receives the signal, the second half of the system starts. A FastAPI backend runs a LangGraph agent workflow. The graph routes the intent, enriches context, plans actions, classifies risk, waits for human approval where needed, executes tools, verifies the result, and writes an audit trail.
-
-Here the agent has proposed three real actions: create a Gmail draft, create a Google Calendar reminder, and append the commitment to a Google Sheet.
-
-The Human-in-the-Loop layer is important. Low-risk actions, like logging to Sheets or creating a personal calendar reminder, can execute automatically. Medium-risk actions, like drafting an email, go into the approval queue. I can approve, modify, reject, or let the timeout path execute according to the risk policy. High-risk actions would hard block.
-
-Now I approve the Gmail draft.
-
-The backend does not call random custom scripts directly. It calls a local ScreenOps Google MCP server over stdio. That MCP layer exposes tools for Gmail draft creation, Calendar event creation, Sheets append, and verification. After execution, the verification agent checks that the draft exists, the event exists, and the sheet row was appended.
-
-So the screen data stayed private in the browser, but the outside world still changed through controlled MCP tool calls.
-
-This is the main difference from a normal automation tool or a simple chatbot. ScreenOps combines local browser inference, a privacy-preserving JSON boundary, a LangGraph agent harness, Human-in-the-Loop risk control, MCP tool execution, and verification.
-
-I also added evals so the project is not judged only by one happy-path demo. There are fifteen extraction scenarios checking intent, entity, action, deadline, fallback parsing, and false positives. There are also fifteen planning scenarios checking the expected action plan and risk classification.
-
-Codex and OpenAI tools were used throughout the hackathon to break down the PRD, scaffold the React and FastAPI code, implement the LangGraph workflow, debug browser model issues, wire the MCP layer, write evals, and prepare the documentation. I manually reviewed the privacy boundary, Google OAuth setup, final scope, and demo path.
-
-ScreenOps shows a practical direction for agentic AI in sensitive workplaces: local private sensing in the browser, structured intent at the boundary, and verified real-world action through MCP.
-
-The screen stays private. The workflow still gets done.
+Codex and OpenAI tools were used throughout the hackathon for architecture, coding, debugging, evals, and documentation. The final result is a working prototype where the screen stays private, but the workflow still gets done.
 
 ## Short Backup Script
 
@@ -179,6 +157,6 @@ In this demo, the agent detects one primary commitment from screen and audio con
 
 The tool layer runs through a local ScreenOps MCP server, exposing Gmail, Calendar, Sheets, and verification tools over stdio.
 
-The project also includes evals: fifteen extraction scenarios and fifteen planning scenarios, both passing.
+The project also includes evals: sixteen extraction scenarios and fifteen planning scenarios, both passing.
 
 This is not a chatbot. It is a privacy-preserving agentic workflow system: local browser intelligence, structured intent boundary, LangGraph orchestration, MCP execution, and verified outcomes.

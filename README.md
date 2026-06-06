@@ -6,6 +6,10 @@ ScreenOps watches live work context in the browser, extracts one structured work
 
 Repository: https://github.com/Ajey95/screenops-mvp
 
+## Demo Link
+
+Demo video: `Add your recorded demo link here`
+
 ## Privacy-First Architecture
 
 ![ScreenOps privacy-first architecture](docs/screenops-privacy-first-architecture.png)
@@ -119,7 +123,7 @@ Partial or future work:
 - GitHub MCP stretch workflow.
 - Production packaging and enterprise auth.
 
-## Local Setup
+## Setup Instructions
 
 Prerequisites:
 
