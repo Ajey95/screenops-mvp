@@ -228,3 +228,59 @@ The repository intentionally excludes local secrets and runtime artifacts:
 - local tool binaries
 
 Use [.env.example](.env.example) as the setup template.
+
+## Screenshots
+
+### 1. Initial ScreenOps Dashboard
+
+![Initial ScreenOps dashboard](docs/screenshots/01-initial-dashboard.png)
+
+The app opens with WebGPU readiness, Google/MCP checks, the live capture panel, and empty intent/agent sections before capture starts.
+
+### 2. Browser Screen Share Picker
+
+![Browser screen share picker](docs/screenshots/02-screen-share-picker.png)
+
+Chrome prompts for the Discord tab and tab audio sharing so ScreenOps can read the live workspace locally.
+
+### 3. Discord Share Active
+
+![Discord share active](docs/screenshots/03-discord-share-active.png)
+
+The Discord tab is actively shared into ScreenOps while local models are loaded and ready.
+
+### 4. Local Model Outputs
+
+![Local model outputs](docs/screenshots/04-local-model-outputs.png)
+
+ScreenOps shows local screen reading, Whisper transcription, structured intent, and browser LLM raw output before backend action.
+
+### 5. Intent Signal and Low-Risk Actions
+
+![Intent signal and low-risk actions](docs/screenshots/05-intent-and-low-risk-actions.png)
+
+The backend receives only structured JSON, plans actions, and executes verified low-risk Calendar and Sheets steps.
+
+### 6. Human Approval Queue
+
+![Human approval queue](docs/screenshots/06-approval-queue.png)
+
+The Gmail draft remains pending as a medium-risk action while Calendar and Sheets are already verified.
+
+### 7. Verified Gmail Draft
+
+![Verified Gmail draft](docs/screenshots/07-gmail-draft.png)
+
+Gmail contains the generated draft addressed to Priya Nair with the extracted Q3 report follow-up.
+
+### 8. Verified Calendar Event
+
+![Verified Calendar event](docs/screenshots/08-calendar-event.png)
+
+Google Calendar contains the ScreenOps reminder on Thursday, June 11 at 9:00 AM.
+
+### 9. Verified Sheets Commitment Log
+
+![Verified Sheets commitment log](docs/screenshots/09-sheets-log.png)
+
+Google Sheets records the detected commitment with entity, action, deadline, source, and status.
