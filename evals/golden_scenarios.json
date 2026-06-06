@@ -1,0 +1,92 @@
+[
+  {
+    "name": "meeting_q3_report",
+    "signal": {"signal_type": "commitment", "source": "audio", "context": "meeting", "entity": "Priya", "action_required": "send the Q3 report", "deadline": "Thursday", "confidence": 0.91},
+    "expected_tools": ["gmail.drafts.create", "calendar.events.create", "sheets.values.append"],
+    "expected_risks": {"gmail.drafts.create": "MEDIUM", "calendar.events.create": "LOW", "sheets.values.append": "LOW"}
+  },
+  {
+    "name": "meeting_follow_up_ravi",
+    "signal": {"signal_type": "commitment", "source": "audio", "context": "meeting", "entity": "Ravi", "action_required": "follow up on deployment checklist", "deadline": "tomorrow", "confidence": 0.86},
+    "expected_tools": ["gmail.drafts.create", "calendar.events.create", "sheets.values.append"],
+    "expected_risks": {"gmail.drafts.create": "MEDIUM", "calendar.events.create": "LOW", "sheets.values.append": "LOW"}
+  },
+  {
+    "name": "meeting_review_notes",
+    "signal": {"signal_type": "task", "source": "audio", "context": "meeting", "entity": "Asha", "action_required": "prepare review notes", "deadline": "Friday", "confidence": 0.82},
+    "expected_tools": ["gmail.drafts.create", "calendar.events.create", "sheets.values.append"],
+    "expected_risks": {"gmail.drafts.create": "MEDIUM", "calendar.events.create": "LOW", "sheets.values.append": "LOW"}
+  },
+  {
+    "name": "meeting_send_invoice",
+    "signal": {"signal_type": "commitment", "source": "audio", "context": "meeting", "entity": "Meera", "action_required": "send the invoice summary", "deadline": "Monday", "confidence": 0.88},
+    "expected_tools": ["gmail.drafts.create", "calendar.events.create", "sheets.values.append"],
+    "expected_risks": {"gmail.drafts.create": "MEDIUM", "calendar.events.create": "LOW", "sheets.values.append": "LOW"}
+  },
+  {
+    "name": "meeting_schedule_design_review",
+    "signal": {"signal_type": "deadline", "source": "audio", "context": "meeting", "entity": "Design Team", "action_required": "schedule design review", "deadline": "next week", "confidence": 0.84},
+    "expected_tools": ["gmail.drafts.create", "calendar.events.create", "sheets.values.append"],
+    "expected_risks": {"gmail.drafts.create": "MEDIUM", "calendar.events.create": "LOW", "sheets.values.append": "LOW"}
+  },
+  {
+    "name": "email_unanswered_question",
+    "signal": {"signal_type": "question", "source": "screen", "context": "email", "entity": "Nikhil", "action_required": "reply with API status", "deadline": "today", "confidence": 0.79},
+    "expected_tools": ["gmail.drafts.create", "calendar.events.create", "sheets.values.append"],
+    "expected_risks": {"gmail.drafts.create": "MEDIUM", "calendar.events.create": "LOW", "sheets.values.append": "LOW"}
+  },
+  {
+    "name": "email_contract_deadline",
+    "signal": {"signal_type": "deadline", "source": "screen", "context": "email", "entity": "Legal", "action_required": "review vendor contract", "deadline": "Wednesday", "confidence": 0.9},
+    "expected_tools": ["gmail.drafts.create", "calendar.events.create", "sheets.values.append"],
+    "expected_risks": {"gmail.drafts.create": "MEDIUM", "calendar.events.create": "LOW", "sheets.values.append": "LOW"}
+  },
+  {
+    "name": "email_send_deck",
+    "signal": {"signal_type": "commitment", "source": "screen", "context": "email", "entity": "Ananya", "action_required": "send the investor deck", "deadline": "tomorrow", "confidence": 0.87},
+    "expected_tools": ["gmail.drafts.create", "calendar.events.create", "sheets.values.append"],
+    "expected_risks": {"gmail.drafts.create": "MEDIUM", "calendar.events.create": "LOW", "sheets.values.append": "LOW"}
+  },
+  {
+    "name": "email_budget_answer",
+    "signal": {"signal_type": "question", "source": "screen", "context": "email", "entity": "Finance", "action_required": "answer budget clarification", "deadline": "Friday", "confidence": 0.8},
+    "expected_tools": ["gmail.drafts.create", "calendar.events.create", "sheets.values.append"],
+    "expected_risks": {"gmail.drafts.create": "MEDIUM", "calendar.events.create": "LOW", "sheets.values.append": "LOW"}
+  },
+  {
+    "name": "email_candidate_feedback",
+    "signal": {"signal_type": "task", "source": "screen", "context": "email", "entity": "HR", "action_required": "send candidate feedback", "deadline": "today", "confidence": 0.83},
+    "expected_tools": ["gmail.drafts.create", "calendar.events.create", "sheets.values.append"],
+    "expected_risks": {"gmail.drafts.create": "MEDIUM", "calendar.events.create": "LOW", "sheets.values.append": "LOW"}
+  },
+  {
+    "name": "mixed_clipboard_ticket",
+    "signal": {"signal_type": "task", "source": "clipboard", "context": "code", "entity": "Backend Team", "action_required": "follow up on ticket API-42", "deadline": "tomorrow", "confidence": 0.78},
+    "expected_tools": ["gmail.drafts.create", "calendar.events.create", "sheets.values.append"],
+    "expected_risks": {"gmail.drafts.create": "MEDIUM", "calendar.events.create": "LOW", "sheets.values.append": "LOW"}
+  },
+  {
+    "name": "mixed_chat_action",
+    "signal": {"signal_type": "commitment", "source": "screen", "context": "chat", "entity": "Sana", "action_required": "share QA checklist", "deadline": "Thursday", "confidence": 0.85, "recipient_email": "sana@example.com"},
+    "expected_tools": ["gmail.drafts.create", "calendar.events.create", "sheets.values.append"],
+    "expected_risks": {"gmail.drafts.create": "MEDIUM", "calendar.events.create": "LOW", "sheets.values.append": "LOW"}
+  },
+  {
+    "name": "mixed_doc_deadline",
+    "signal": {"signal_type": "deadline", "source": "screen", "context": "document", "entity": "Ops", "action_required": "update rollout doc", "deadline": "Monday", "confidence": 0.81},
+    "expected_tools": ["gmail.drafts.create", "calendar.events.create", "sheets.values.append"],
+    "expected_risks": {"gmail.drafts.create": "MEDIUM", "calendar.events.create": "LOW", "sheets.values.append": "LOW"}
+  },
+  {
+    "name": "mixed_audio_clipboard",
+    "signal": {"signal_type": "commitment", "source": "audio", "context": "meeting", "entity": "DevRel", "action_required": "send hackathon repo link", "deadline": "tonight", "confidence": 0.89},
+    "expected_tools": ["gmail.drafts.create", "calendar.events.create", "sheets.values.append"],
+    "expected_risks": {"gmail.drafts.create": "MEDIUM", "calendar.events.create": "LOW", "sheets.values.append": "LOW"}
+  },
+  {
+    "name": "mixed_code_review",
+    "signal": {"signal_type": "task", "source": "screen", "context": "code", "entity": "Reviewer", "action_required": "respond to pull request comments", "deadline": "tomorrow", "confidence": 0.77},
+    "expected_tools": ["gmail.drafts.create", "calendar.events.create", "sheets.values.append"],
+    "expected_risks": {"gmail.drafts.create": "MEDIUM", "calendar.events.create": "LOW", "sheets.values.append": "LOW"}
+  }
+]

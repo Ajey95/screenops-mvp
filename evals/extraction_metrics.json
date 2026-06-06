@@ -1,0 +1,158 @@
+{
+  "generated_at": "2026-06-06T22:03:06.266Z",
+  "scenarios": 16,
+  "passed": 16,
+  "failures": 0,
+  "intent_match_rate": 1,
+  "entity_f1_proxy": 1,
+  "action_match_rate": 1,
+  "deadline_match_rate": 1,
+  "false_positive_rate": 0,
+  "fallback_count": 9,
+  "results": [
+    {
+      "name": "meeting_q3_report",
+      "intent_match": true,
+      "entity_match": true,
+      "action_match": true,
+      "deadline_match": true,
+      "false_positive": false,
+      "extraction_mode": "phi3"
+    },
+    {
+      "name": "meeting_deployment_followup",
+      "intent_match": true,
+      "entity_match": true,
+      "action_match": true,
+      "deadline_match": true,
+      "false_positive": false,
+      "extraction_mode": "phi3"
+    },
+    {
+      "name": "email_api_status",
+      "intent_match": true,
+      "entity_match": true,
+      "action_match": true,
+      "deadline_match": true,
+      "false_positive": false,
+      "extraction_mode": "local_safety_parser"
+    },
+    {
+      "name": "email_contract_review",
+      "intent_match": true,
+      "entity_match": true,
+      "action_match": true,
+      "deadline_match": true,
+      "false_positive": false,
+      "extraction_mode": "local_safety_parser"
+    },
+    {
+      "name": "clipboard_ticket",
+      "intent_match": true,
+      "entity_match": true,
+      "action_match": true,
+      "deadline_match": true,
+      "false_positive": false,
+      "extraction_mode": "phi3"
+    },
+    {
+      "name": "chat_qa_checklist",
+      "intent_match": true,
+      "entity_match": true,
+      "action_match": true,
+      "deadline_match": true,
+      "false_positive": false,
+      "extraction_mode": "local_safety_parser"
+    },
+    {
+      "name": "doc_rollout_update",
+      "intent_match": true,
+      "entity_match": true,
+      "action_match": true,
+      "deadline_match": true,
+      "false_positive": false,
+      "extraction_mode": "local_safety_parser"
+    },
+    {
+      "name": "meeting_invoice",
+      "intent_match": true,
+      "entity_match": true,
+      "action_match": true,
+      "deadline_match": true,
+      "false_positive": false,
+      "extraction_mode": "phi3"
+    },
+    {
+      "name": "email_budget",
+      "intent_match": true,
+      "entity_match": true,
+      "action_match": true,
+      "deadline_match": true,
+      "false_positive": false,
+      "extraction_mode": "local_safety_parser"
+    },
+    {
+      "name": "meeting_no_commitment",
+      "intent_match": true,
+      "entity_match": true,
+      "action_match": true,
+      "deadline_match": true,
+      "false_positive": false,
+      "extraction_mode": "phi3"
+    },
+    {
+      "name": "malformed_json_fallback",
+      "intent_match": true,
+      "entity_match": true,
+      "action_match": true,
+      "deadline_match": true,
+      "false_positive": false,
+      "extraction_mode": "local_safety_parser"
+    },
+    {
+      "name": "malformed_audio_fallback",
+      "intent_match": true,
+      "entity_match": true,
+      "action_match": true,
+      "deadline_match": true,
+      "false_positive": false,
+      "extraction_mode": "local_safety_parser"
+    },
+    {
+      "name": "candidate_feedback",
+      "intent_match": true,
+      "entity_match": true,
+      "action_match": true,
+      "deadline_match": true,
+      "false_positive": false,
+      "extraction_mode": "local_safety_parser"
+    },
+    {
+      "name": "repo_link",
+      "intent_match": true,
+      "entity_match": true,
+      "action_match": true,
+      "deadline_match": true,
+      "false_positive": false,
+      "extraction_mode": "phi3"
+    },
+    {
+      "name": "pull_request_comments",
+      "intent_match": true,
+      "entity_match": true,
+      "action_match": true,
+      "deadline_match": true,
+      "false_positive": false,
+      "extraction_mode": "phi3"
+    },
+    {
+      "name": "discord_screen_beats_audio",
+      "intent_match": true,
+      "entity_match": true,
+      "action_match": true,
+      "deadline_match": true,
+      "false_positive": false,
+      "extraction_mode": "local_safety_parser"
+    }
+  ]
+}

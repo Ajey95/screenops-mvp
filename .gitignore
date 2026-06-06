@@ -1,0 +1,24 @@
+# Local secrets
+.env
+.env.*
+!.env.example
+client_secret*.json
+docs/client_secret*.json
+
+# Python
+__pycache__/
+.venv/
+venv/
+
+# Node
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+
+# Local app data
+.screenops/
+tools/
+*.db
+*.sqlite
+*.sqlite3
