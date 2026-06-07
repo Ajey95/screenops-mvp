@@ -16,8 +16,16 @@ class Settings(BaseSettings):
     google_mcp_config_file: str = ".screenops/google-mcp-config.json"
     audit_db_file: str = ".screenops/audit.sqlite3"
     cors_origin: str = "http://localhost:5173"
+    cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
     calendar_timezone: str = "Asia/Kolkata"
     calendar_reminder_hour: int = 9
+
+    @property
+    def allowed_origins(self) -> list[str]:
+        origins = [origin.strip() for origin in self.cors_origins.split(",") if origin.strip()]
+        if self.cors_origin and self.cors_origin not in origins:
+            origins.append(self.cors_origin)
+        return origins
 
     @property
     def root_dir(self) -> Path:
