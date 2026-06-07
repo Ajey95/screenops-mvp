@@ -284,3 +284,9 @@ Google Calendar contains the ScreenOps reminder on Thursday, June 11 at 9:00 AM.
 ![Verified Sheets commitment log](docs/screenshots/09-sheets-log.png)
 
 Google Sheets records the detected commitment with entity, action, deadline, source, and status.
+
+### 10. Network Inspector Privacy Proof
+
+![Network inspector privacy proof](docs/screenshots/10-network-inspector-proof.png)
+
+Chrome DevTools is open during live capture to show the network boundary: raw screen pixels, audio chunks, and local model inputs are not uploaded while ScreenOps runs browser-side inference.
