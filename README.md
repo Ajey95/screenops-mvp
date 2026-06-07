@@ -10,6 +10,10 @@ Repository: https://github.com/Ajey95/screenops-mvp
 
 Demo video: [Link](https://youtu.be/2djY_VtzFu8)
 
+## Deploy
+
+Live app: [https://screenops-mvp.vercel.app/](https://screenops-mvp.vercel.app/)
+
 ## Privacy-First Architecture
 
 ![ScreenOps privacy-first architecture](docs/screenops-privacy-first-architecture.png)
