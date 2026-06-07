@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     commitment_sheet_id: str = "1H-XdYFIjET8Cc88wg2Ir9tIOGuzfUTOplvvesqJMDuI"
     google_client_secret_file: str = "docs/client_secret_358547275814-9vd3hqba2r0i498o4n0cvmkgdn2f7qbg.apps.googleusercontent.com.json"
     google_token_file: str = ".screenops/google-token.json"
+    google_token_cache_file: str = ".screenops/google-token-runtime.json"
     google_mcp_executable: str = "tools/google-mcp-server.exe"
     google_mcp_config_file: str = ".screenops/google-mcp-config.json"
     audit_db_file: str = ".screenops/audit.sqlite3"

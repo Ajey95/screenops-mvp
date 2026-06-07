@@ -29,12 +29,18 @@ def token_path(settings: Settings) -> Path:
     return settings.resolve(settings.google_token_file)
 
 
+def token_cache_path(settings: Settings) -> Path:
+    return settings.resolve(settings.google_token_cache_file)
+
+
 def has_token(settings: Settings) -> bool:
-    return token_path(settings).exists()
+    return token_path(settings).exists() or token_cache_path(settings).exists()
 
 
 def _credentials(settings: Settings) -> Credentials:
-    path = token_path(settings)
+    source_path = token_path(settings)
+    cache_path = token_cache_path(settings)
+    path = cache_path if cache_path.exists() else source_path
     if not path.exists():
         raise GoogleActionError(
             "Google token is missing. Run `python scripts/google_auth.py` once before executing real actions."
@@ -43,13 +49,29 @@ def _credentials(settings: Settings) -> Credentials:
     if creds.expired and creds.refresh_token:
         try:
             creds.refresh(Request())
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(creds.to_json(), encoding="utf-8")
         except Exception as exc:
             raise GoogleActionError(f"Google token refresh failed. Re-run `python scripts/google_auth.py`. {exc}") from exc
+        _persist_refreshed_token(settings, path, creds)
     if not creds.valid:
         raise GoogleActionError("Google token exists but is not valid. Re-run `python scripts/google_auth.py`.")
     return creds
+
+
+def _persist_refreshed_token(settings: Settings, loaded_path: Path, creds: Credentials) -> None:
+    cache_path = token_cache_path(settings)
+    candidates: list[Path] = []
+    if not str(loaded_path).startswith("/etc/secrets/"):
+        candidates.append(loaded_path)
+    if cache_path not in candidates:
+        candidates.append(cache_path)
+
+    for candidate in candidates:
+        try:
+            candidate.parent.mkdir(parents=True, exist_ok=True)
+            candidate.write_text(creds.to_json(), encoding="utf-8")
+            return
+        except OSError:
+            continue
 
 
 def _service(settings: Settings, api: str, version: str):
