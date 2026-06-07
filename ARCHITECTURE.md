@@ -19,7 +19,7 @@ Backend
   LangGraph execution graph
   HITL approval gate
   MCP client
-  Local ScreenOps Google MCP server
+  Python ScreenOps Google MCP server over stdio
   SQLite audit trail for local MVP
 
 External services
@@ -60,7 +60,7 @@ Not sent:
 5. Risk classifier marks Gmail draft as MEDIUM and Calendar/Sheets as LOW.
 6. Approval gate waits for human confirmation for the Gmail draft.
 7. Execution graph calls MCP tools over stdio.
-8. The local ScreenOps Google MCP server wraps Gmail, Calendar, and Sheets APIs.
+8. The Python ScreenOps Google MCP server module wraps Gmail, Calendar, and Sheets APIs without requiring a platform-specific binary.
 9. Verification node poll-confirms Gmail, Calendar, and Sheets results through MCP verify tools.
 10. SQLite audit store records signal, plan, execution, and verification events.
 

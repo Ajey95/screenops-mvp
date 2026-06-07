@@ -283,21 +283,28 @@ Risk classified
 
 | MCP Server | Actions Used | Example Use Case |
 |---|---|---|
-| **Gmail MCP** | `draft_email`, `send_email`, `list_threads`, `get_thread` | Draft follow-up to Ravi after meeting commitment detected |
-| **Google Calendar MCP** | `create_event`, `list_events`, `update_event` | Block 2 hours Thursday for deadline detected on screen |
-| **Google Sheets MCP** | `append_row`, `update_cell`, `read_range` | Log commitment to personal tracker sheet |
-| **Google Drive MCP** | `create_file`, `update_file` | Create meeting notes doc from transcribed audio |
+| **Python ScreenOps Google MCP** | `gmail_draft_create`, `gmail_draft_verify` | Draft and verify a follow-up email after a commitment is detected |
+| **Python ScreenOps Google MCP** | `calendar_event_create`, `calendar_event_verify` | Create and verify a reminder for the extracted deadline |
+| **Python ScreenOps Google MCP** | `sheets_values_append`, `sheets_append_verify` | Log and verify the commitment in the tracker sheet |
+| **Google Drive MCP** *(stretch)* | `create_file`, `update_file` | Create meeting notes doc from transcribed audio |
 | **GitHub MCP** *(stretch)* | `create_issue`, `assign_issue`, `add_comment` | Create issue when bug report detected in clipboard |
 
 ---
 
-### 5.2 MCP Server URLs
+### 5.2 MCP Transport and Deployment
 
+The MVP uses a Python-based ScreenOps Google MCP server module instead of a platform-specific Google MCP binary. The FastAPI backend starts the MCP server over stdio and calls its tools through the MCP Python SDK.
+
+Current implementation path:
+
+```text
+FastAPI / LangGraph
+  -> MCP stdio client
+  -> app.screenops_google_mcp
+  -> official Google Gmail, Calendar, and Sheets APIs
 ```
-Gmail:     https://gmailmcp.googleapis.com/mcp/v1
-Calendar:  https://calendarmcp.googleapis.com/mcp/v1
-Drive:     https://drivemcp.googleapis.com/mcp/v1
-```
+
+This keeps the PRD's MCP tool boundary while making the deployment cross-platform. Locally it runs on Windows, and on Render it runs as a Python module without requiring `tools/google-mcp-server.exe`. Google OAuth token/config files are supplied as environment-specific secrets.
 
 ---
 
@@ -410,7 +417,7 @@ Three eval layers are baked **structurally** into the system — not added as an
 | Intent reasoning | Phi-3 mini via Transformer.js | Small enough for browser, strong enough for structured signal extraction |
 | Backend framework | FastAPI (Python) | Async, lightweight, pairs naturally with LangGraph and Python MCP SDKs |
 | Agent orchestration | LangGraph | Native support for stateful graph-based workflows, branching, retries, HITL interrupts |
-| MCP tooling | Google Workspace MCP, GitHub MCP | Official MCP servers — no custom API wiring for Gmail, Calendar, Sheets, Drive |
+| MCP tooling | Python ScreenOps Google MCP server, MCP Python SDK | Cross-platform stdio MCP tool boundary for Gmail, Calendar, and Sheets; wraps official Google APIs and deploys on Render without a platform-specific binary |
 | Commitment memory | Redis | Fast session-level and cross-session commitment state tracking |
 | Audit log | Postgres | Durable, queryable audit trail for all agent actions and reasoning traces |
 | Frontend | React + Tailwind | Streaming approval queue UI, agent trace panel, action log |
@@ -449,9 +456,9 @@ This makes the core privacy guarantee demonstrable in real time: screen frames a
 - [ ] Intent extractor: Phi-3 mini 4-bit quantized producing structured JSON signals from fused screen and audio context
 - [ ] FastAPI backend: `/signals` endpoint receiving and routing intent JSON
 - [ ] LangGraph orchestrator: intent router → context enricher → risk classifier → approval gate → execution agent → verification agent
-- [ ] Gmail MCP integration: `draft_email` from signal context
-- [ ] Google Calendar MCP integration: `create_event`
-- [ ] Google Sheets MCP integration: `append_row`
+- [ ] Python MCP Gmail integration: `gmail_draft_create` from signal context
+- [ ] Python MCP Google Calendar integration: `calendar_event_create`
+- [ ] Python MCP Google Sheets integration: `sheets_values_append`
 - [ ] Redis: commitment state tracking across session
 - [ ] Postgres: audit log schema + writer
 - [ ] React frontend: approval queue UI + streaming agent trace panel + action log
@@ -597,9 +604,9 @@ Status legend:
 | **4.1 Risk Classification** | **Done** | LOW/MEDIUM/HIGH classification is implemented in the agent planning path. |
 | **4.2 Approval Queue UI** | **Done** | Approval cards render proposed actions with approve, modify, and reject controls. |
 | **4.3 HITL State Machine** | **Done** | The implemented state machine covers low-risk auto-execution, medium-risk queueing, 60-second timeout auto-execution, approval, modification, rejection, verification, and audit logging. |
-| **5. MCP Tool Layer** | **Partial** | Core Gmail, Calendar, and Sheets actions run through a local stdio MCP server with verification tools. Drive/GitHub stretch integrations are not implemented. |
-| **5.1 Connected MCP Servers** | **Partial** | Gmail, Calendar, and Sheets are covered by the ScreenOps local MCP server. Drive and GitHub remain stretch/not implemented. |
-| **5.2 MCP Server URLs** | **Partial** | Local MCP configuration exists for demo use. External hosted MCP URLs are not part of the current MVP path. |
+| **5. MCP Tool Layer** | **Partial** | Core Gmail, Calendar, and Sheets actions run through the Python ScreenOps MCP stdio server with verification tools. Drive/GitHub stretch integrations are not implemented. |
+| **5.1 Connected MCP Servers** | **Partial** | Gmail, Calendar, and Sheets are covered by the Python ScreenOps Google MCP server. Drive and GitHub remain stretch/not implemented. |
+| **5.2 MCP Transport and Deployment** | **Done** | The active MVP path uses a Python MCP module over stdio, deployable on Render without the old Windows Google MCP binary. |
 | **5.3 Tool Call Sequence Example** | **Done** | The planned Gmail, Calendar, and Sheets sequence has been implemented and verified through MCP-backed tool calls. |
 | **6. Evaluation Framework** | **Done** | MVP eval coverage includes backend planning/action evals and frontend extraction evals with persisted metrics. Browser-level model quality evals remain a future roadmap item. |
 | **6.1 Extraction Accuracy** | **Done** | Extraction fixture evals validate JSON parsing, fallback extraction, entity/action/deadline matching, false-positive rate, and write metrics to `evals/extraction_metrics.json`. |

@@ -25,13 +25,13 @@ ScreenOps keeps raw screen and audio data local. Browser-side models extract int
 - Real Gmail draft creation verified.
 - Real Calendar event creation verified.
 - Real Sheets append verified.
-- Backend calls Gmail, Calendar, and Sheets through a local MCP server over stdio.
+- Backend calls Gmail, Calendar, and Sheets through the Python ScreenOps MCP server over stdio.
 - Extraction evals: 15/15 scenarios passing.
 - Planning evals: 15/15 scenarios passing.
 
 ## Partially Implemented
 
-- Generic third-party Google MCP binary/config exists, but the final demo path uses the local ScreenOps Google MCP server because it exposes the exact PRD tools required for Gmail draft, Calendar create, Sheets append, and verification.
+- Generic third-party Google MCP binary/config is no longer the active deployment path. The final demo path uses the Python ScreenOps Google MCP server because it runs cross-platform on Render and exposes the exact PRD tools required for Gmail draft, Calendar create, Sheets append, and verification.
 
 ## Planned / Future
 
@@ -48,7 +48,7 @@ ScreenOps keeps raw screen and audio data local. Browser-side models extract int
 - LangGraph
 - Google OAuth
 - Gmail, Calendar, and Sheets APIs
-- Local ScreenOps Google MCP server over stdio
+- Python ScreenOps Google MCP server over stdio
 
 ## AI Usage
 

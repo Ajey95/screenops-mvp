@@ -50,7 +50,7 @@ LangGraph agent
   route -> enrich -> plan -> classify risk -> approval -> execute -> verify
         |
         v
-Local MCP stdio server
+Python ScreenOps MCP stdio server
   Gmail draft
   Calendar reminder
   Sheets commitment log
@@ -69,7 +69,7 @@ Raw screen frames and raw audio do not leave the browser tab. The backend receiv
 - FastAPI backend with signal intake, approval, run lookup, auth status, and SSE event stream endpoints.
 - LangGraph planning and execution workflow.
 - Risk-based approval gate: low-risk Calendar/Sheets can auto-execute, medium-risk Gmail draft waits for approval.
-- Local ScreenOps Google MCP server over stdio for Gmail, Calendar, Sheets, and verification tools.
+- Python-based ScreenOps Google MCP server over stdio for Gmail, Calendar, Sheets, and verification tools.
 - Google OAuth setup for real Workspace actions.
 - SQLite audit persistence for local demo runs.
 - Extraction and planning evals for repeatable validation.
@@ -84,7 +84,7 @@ Raw screen frames and raw audio do not leave the browser tab. The backend receiv
   - `HuggingFaceTB/SmolLM2-360M-Instruct`
 - Backend: FastAPI, Python
 - Agent orchestration: LangGraph
-- Tool execution: MCP over stdio
+- Tool execution: Python MCP server over stdio
 - Workspace actions: Gmail API, Google Calendar API, Google Sheets API
 - Local persistence: SQLite audit log
 - Evals: TypeScript extraction evals and Python planning evals
@@ -96,7 +96,7 @@ Implemented:
 - React/Vite UI for live capture, model readiness, run trace, approval queue, and verified action results.
 - Browser worker for local screen, audio, OCR, and intent inference.
 - Backend signal API and LangGraph agent workflow.
-- Local MCP stdio server for Google actions.
+- Python ScreenOps MCP stdio server for Google actions.
 - Gmail draft creation with approval.
 - Calendar event creation with relative deadline resolution in `Asia/Kolkata`.
 - Sheets append to the configured commitment tracker.
@@ -111,7 +111,7 @@ Partial or future work:
 
 - Redis commitment memory.
 - Postgres audit database for production.
-- Generic third-party Google MCP binary integration. The demo uses the local ScreenOps MCP server because it exposes the exact Gmail draft, Calendar create, Sheets append, and verification tools needed.
+- Generic third-party Google MCP binary integration. The deployed demo uses the Python ScreenOps MCP server because it is cross-platform, runs on Render without a Windows binary, and exposes the exact Gmail draft, Calendar create, Sheets append, and verification tools needed.
 - GitHub MCP stretch workflow.
 - Production packaging and enterprise auth.
 

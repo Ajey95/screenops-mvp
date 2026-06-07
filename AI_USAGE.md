@@ -46,7 +46,7 @@ Manual review: Verified that the generated trace contains the expected planning 
 
 Asked Codex to identify the external Google requirements and implement an MCP tool layer for Gmail, Calendar, and Sheets.
 
-Manual review: OAuth credentials were created manually in Google Cloud. The backend now calls a local ScreenOps Google MCP server over stdio; that MCP server wraps the official Google APIs for the required actions.
+Manual review: OAuth credentials were created manually in Google Cloud. The backend now calls a Python ScreenOps Google MCP server over stdio; that MCP server wraps the official Google APIs for the required actions and deploys on Render without a platform-specific binary.
 
 ### 7. Debugging
 
