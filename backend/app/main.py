@@ -1,4 +1,5 @@
 from datetime import datetime, timezone
+import importlib.util
 
 import json
 
@@ -35,7 +36,7 @@ def health() -> dict[str, str]:
 def auth_status() -> AuthStatus:
     return AuthStatus(
         google_token_present=has_token(settings),
-        mcp_binary_present=settings.resolve(settings.google_mcp_executable).exists(),
+        mcp_binary_present=importlib.util.find_spec(f"{__package__}.screenops_google_mcp") is not None,
         mcp_config_present=settings.resolve(settings.google_mcp_config_file).exists(),
         sheet_id=settings.commitment_sheet_id,
         recipient_email=settings.demo_recipient_email,
